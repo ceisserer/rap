@@ -67,8 +67,12 @@ public class ServiceManagerImpl implements ServiceManager {
     if( baseUrl != null ) {
       url.append( baseUrl );
     }
-    url.append( request.getRequestURI() )
-      .append( '?' )
+    
+    if( !RWTProperties.isGenerateRelativeURLS() ) {
+        url.append( request.getRequestURI() );
+    }
+    
+    url.append( '?' )
       .append( REQUEST_PARAM )
       .append( '=' )
       .append( encodeParameter( id ) );

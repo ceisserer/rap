@@ -13,6 +13,7 @@
 package org.eclipse.rap.rwt.internal.service;
 
 import static org.eclipse.rap.rwt.internal.RWTProperties.SERVICE_HANDLER_BASE_URL;
+import static org.eclipse.rap.rwt.internal.RWTProperties.SERVICE_HANDLER_GENERATE_RELATIVE_URLS;
 import static org.eclipse.rap.rwt.internal.service.ContextProvider.getContext;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
@@ -237,6 +238,17 @@ public class ServiceManagerImpl_Test {
 
     assertEquals( "http://foo/bar/fooapp/rap?servicehandler=foo", url );
     System.getProperties().remove( SERVICE_HANDLER_BASE_URL );
+  }
+  
+  @Test
+  public void testGetServiceHandlerUrl_withRelativeURL() {
+    getContext().setUISession( null );
+    System.setProperty( SERVICE_HANDLER_GENERATE_RELATIVE_URLS, "true" );
+
+    String url = serviceManager.getServiceHandlerUrl( "foo" );
+
+    assertEquals( "?servicehandler=foo", url );
+    System.getProperties().remove( SERVICE_HANDLER_GENERATE_RELATIVE_URLS );
   }
 
   private static UISessionImpl mockUISessionWithConnectionId( String connectionId ) {

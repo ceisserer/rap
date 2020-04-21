@@ -15,6 +15,7 @@ package org.eclipse.rap.rwt.internal;
 public final class RWTProperties {
 
   public static final String SERVICE_HANDLER_BASE_URL = "org.eclipse.rap.rwt.serviceHandlerBaseURL";
+  public static final String SERVICE_HANDLER_GENERATE_RELATIVE_URLS = "org.eclipse.rap.rwt.serviceHandlerGenerateRelativeURLS"; 
   public static final String DEVELOPMEMT_MODE = "org.eclipse.rap.rwt.developmentMode";
   public static final String TEXT_SIZE_STORE_SIZE = "org.eclipse.rap.rwt.textSizeStoreSize";
 
@@ -30,6 +31,10 @@ public final class RWTProperties {
 
   public static String getServiceHandlerBaseUrl() {
     return System.getProperty( SERVICE_HANDLER_BASE_URL );
+  }
+  
+  public static boolean isGenerateRelativeURLS() {
+    return getBooleanProperty( SERVICE_HANDLER_GENERATE_RELATIVE_URLS, false );
   }
 
   public static boolean isDevelopmentMode() {
